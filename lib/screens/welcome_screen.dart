@@ -38,7 +38,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
     controller?.addListener(() {
       setState(() {});
-      print(animation?.value);
+      // print(animation?.value);
     });
   }
 
@@ -68,17 +68,16 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     // height: animation?.value * 100,
                   ),
                 ),
-                DefaultTextStyle(
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
-                  ),
-                  child: AnimatedTextKit(
-                    animatedTexts: [
-                      TypewriterAnimatedText('Flash Chat'),
-                    ],
-                  ),
-                )
+                AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText('Flash Chat',
+                        textStyle: TextStyle(
+                          fontSize: 45.0,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.black,
+                        )),
+                  ],
+                ),
               ],
             ),
             SizedBox(
