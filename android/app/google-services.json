@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "679930795263",
+    "project_id": "samu-chat",
+    "storage_bucket": "samu-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679930795263:android:9b83c677c73349f66168ca",
+        "android_client_info": {
+          "package_name": "com.samu.bt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679930795263-dcbrj9pdkiv8echih8uaj7kql20l1sph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkBvgjKRaInrRZDWRkTRCgtmJTjSfM6Lg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679930795263-dcbrj9pdkiv8echih8uaj7kql20l1sph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
