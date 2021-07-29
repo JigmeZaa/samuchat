@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:samuchat/screens/login_screen.dart';
 import 'package:samuchat/screens/registration_screen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:samuchat/components/rounded_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
   /*
@@ -57,19 +58,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            /**
-             * Need 3 Things
-             * 1. A Ticker (Clock)
-             * 2. Animation Controller (Start, Stop)
-             * 3. Animation Value (Height, Color)
-             *
-             * Cureved Animation
-             * https://docs.flutter.io/flutter/animation/Curves-class.html
-             *
-             *
-             * Hero Animation
-             * https://developer.android.com/training/transitions/index.html
-             */
             Row(
               children: <Widget>[
                 Hero(
@@ -96,41 +84,19 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             SizedBox(
               height: 48.0,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                elevation: 5.0,
-                color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, LoginScreen.id);
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Log In',
-                  ),
-                ),
-              ),
+            RoundedButton(
+              title: 'Login',
+              colour: Colors.lightBlueAccent,
+              onPressed: () {
+                Navigator.pushNamed(context, LoginScreen.id);
+              },
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, RegistrationScreen.id);
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Register',
-                  ),
-                ),
-              ),
+            RoundedButton(
+              title: 'Register',
+              colour: Colors.blueAccent,
+              onPressed: () {
+                Navigator.pushNamed(context, RegistrationScreen.id);
+              },
             ),
           ],
         ),
