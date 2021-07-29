@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  static String id = 'welcome_screen';
+  /*
+  Documentation
+  https://dartlang.org/guides/language/language-tour#keywords
+  */
+
+  static const String id = 'welcome_screen';
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
