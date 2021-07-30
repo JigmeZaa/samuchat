@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:samuchat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,7 +37,7 @@ class _ChatScreenState extends State<ChatScreen> {
   // void getMessages() async {
   //   final messages = await _fireStore.collection('messages').snapshots();
 
-  //   for (var message in messages ) {
+  //   for (var message in messages) {
   //     print(message.data);
   //   }
   // }
@@ -46,7 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
   void messagesStream() async {
     await for (var snapshot in _fireStore.collection('messages').snapshots()) {
       for (var message in snapshot.docs) {
-        print(message.data());
+        print(message.data);
       }
     }
   }
@@ -73,6 +72,41 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            // StreamBuilder<QuerySnapshot>(
+            //   stream: _fireStore.collection('messages').snapshots(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasData) {
+            //       final messages = snapshot.data!.docs;
+            //       List<Text> messageWidgets = [];
+            //       for (var message in messages) {
+            //         final messageText = message.data['text'];
+            //         final messageSender = message.data['sender'];
+            //       }
+            //     }
+            //     return CircularProgressindicator();
+            //   },
+            // ),
+            StreamBuilder<QuerySnapshot?>(
+              stream: _fireStore.collection('messages').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final messages = snapshot.data!.docs;
+                  List<Text> messageWidgets = [];
+                  for (var message in messages) {
+                    final messageText = message.get('text');
+                    final messageSender = message.get('sender');
+
+                    final messageWidget =
+                        Text('$messageText from $messageSender');
+
+                    messageWidgets.add(messageWidget);
+                  }
+                  return Column(
+                    children: messageWidgets,
+                  );
+                }
+              },
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
