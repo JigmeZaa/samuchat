@@ -12,10 +12,11 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
   String? email;
   String? password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,24 +29,27 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Hero(
-                tag: 'logo',
-                child: Container(
-                  height: 200.0,
-                  child: Image.asset('images/logo.png'),
+              Flexible(
+                child: Hero(
+                  tag: 'logo',
+                  child: Container(
+                    height: 200.0,
+                    child: Image.asset('images/logo.png'),
+                  ),
                 ),
               ),
               SizedBox(
                 height: 48.0,
               ),
               TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  textAlign: TextAlign.center,
-                  onChanged: (value) {
-                    email = value;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your Email')),
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  email = value;
+                },
+                decoration:
+                    kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
+              ),
               SizedBox(
                 height: 8.0,
               ),
@@ -56,7 +60,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   password = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
-                    hintText: 'Enter you Password'),
+                    hintText: 'Enter your password'),
               ),
               SizedBox(
                 height: 24.0,
@@ -65,27 +69,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 title: 'Register',
                 colour: Colors.blueAccent,
                 onPressed: () async {
-                  // print(email);
-                  // print(password);
                   setState(() {
                     showSpinner = true;
                   });
                   try {
-                    UserCredential newUser =
-                        await _auth.createUserWithEmailAndPassword(
-                            email: email!, password: password!);
+                    final newUser = await _auth.createUserWithEmailAndPassword(
+                        email: email!, password: password!);
                     if (newUser != null) {
                       Navigator.pushNamed(context, ChatScreen.id);
                     }
+
                     setState(() {
-                      showSpinner = true;
+                      showSpinner = false;
                     });
-                  } on FirebaseAuthException catch (e) {
-                    if (e.code == 'weak-password') {
-                      print('The password provided is too weak.');
-                    } else if (e.code == 'email-already-in-use') {
-                      print('The account already exists for that email.');
-                    }
                   } catch (e) {
                     print(e);
                   }

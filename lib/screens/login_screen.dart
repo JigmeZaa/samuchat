@@ -12,10 +12,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  FirebaseAuth _auth = FirebaseAuth.instance;
   bool showSpinner = false;
+  final _auth = FirebaseAuth.instance;
   String? email;
   String? password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,24 +29,27 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Hero(
-                tag: 'logo',
-                child: Container(
-                  height: 200.0,
-                  child: Image.asset('images/logo.png'),
+              Flexible(
+                child: Hero(
+                  tag: 'logo',
+                  child: Container(
+                    height: 200.0,
+                    child: Image.asset('images/logo.png'),
+                  ),
                 ),
               ),
               SizedBox(
                 height: 48.0,
               ),
               TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  textAlign: TextAlign.center,
-                  onChanged: (value) {
-                    email = value;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your email')),
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  email = value;
+                },
+                decoration:
+                    kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
+              ),
               SizedBox(
                 height: 8.0,
               ),
@@ -56,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   password = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
-                    hintText: 'Enter your Password'),
+                    hintText: 'Enter your password'),
               ),
               SizedBox(
                 height: 24.0,
@@ -74,8 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (user != null) {
                       Navigator.pushNamed(context, ChatScreen.id);
                     }
+
                     setState(() {
-                      showSpinner = true;
+                      showSpinner = false;
                     });
                   } catch (e) {
                     print(e);
